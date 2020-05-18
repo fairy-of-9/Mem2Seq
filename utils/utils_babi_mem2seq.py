@@ -68,11 +68,12 @@ class Dataset(data.Dataset):
 
     def __getitem__(self, index):
         """Returns one data pair (source and target)."""
+        print('get item')
         src_seq = self.src_seqs[index]
         trg_seq = self.trg_seqs[index]
         index_s = self.index_seqs[index]
         gete_s  = self.gate_seq[index]
-        src_seq = self.preprocess(src_seq, self.src_word2id, trg=False)
+        src_seq = self.preprocess(src_seq, self.src_word2id, trg=False)  # word -> idx tensor
         trg_seq = self.preprocess(trg_seq, self.trg_word2id)
         index_s = self.preprocess_inde(index_s,src_seq)
         gete_s  = self.preprocess_gate(gete_s)
@@ -80,7 +81,6 @@ class Dataset(data.Dataset):
         conv_seq = self.preprocess(conv_seq, self.src_word2id, trg=False)
         ID = self.ID[index]
         kb_arr = self.kb_arr[index]
-        
         return src_seq, trg_seq, index_s, gete_s,self.max_len,self.src_seqs[index],self.trg_seqs[index], conv_seq,self.ent[index], ID, kb_arr
 
     def __len__(self):
@@ -116,8 +116,12 @@ class Dataset(data.Dataset):
         sequence = torch.Tensor(sequence)
         return sequence
 
-def collate_fn(data):
-    def merge(sequences,max_len):
+def collate_fn(data):  # padding data & transpose shape
+    def merge(sequences,max_len):  # padding
+
+        for s in sequences:
+            print(s.shape)
+
         lengths = [len(seq) for seq in sequences]
         if (max_len):
             padded_seqs = torch.ones(len(sequences), max(lengths), MEM_TOKEN_SIZE).long()
@@ -129,7 +133,11 @@ def collate_fn(data):
             for i, seq in enumerate(sequences):
                 end = lengths[i]
                 padded_seqs[i, :end] = seq[:end]
+
+        print(padded_seqs.shape)
         return padded_seqs, lengths
+
+    print('collate_fn')
 
     # sort a list by sequence length (descending order) to use pack_padded_sequence
     data.sort(key=lambda x: len(x[0]), reverse=True)
@@ -141,8 +149,10 @@ def collate_fn(data):
     ind_seqs, _ = merge(ind_seqs,None)
     gete_s, _ = merge(gete_s,None)
     conv_seqs, conv_lengths = merge(conv_seq, max_len)
-    
-    src_seqs = Variable(src_seqs).transpose(0,1)
+    print(src_seqs.shape)
+    # src_seqs = 8 70 3
+    src_seqs = Variable(src_seqs).transpose(0,1) # 70 8 3
+    print(src_seqs.shape)
     trg_seqs = Variable(trg_seqs).transpose(0,1)
     ind_seqs = Variable(ind_seqs).transpose(0,1)
     gete_s = Variable(gete_s).transpose(0,1)
@@ -159,7 +169,7 @@ def collate_fn(data):
 def read_langs(file_name, entity, max_line = None):
     logging.info(("Reading lines from {}".format(file_name)))
     data=[]
-    contex_arr = []
+    contex_arr = []  # 이때까지 나온 context.
     conversation_arr = []
     kb_arr = []
     u=None
@@ -184,11 +194,11 @@ def read_langs(file_name, entity, max_line = None):
                     if u!='<SILENCE>': user_counter += 1
                     system_counter += 1
 
-                    gen_u = generate_memory(u, "$u", str(time_counter)) 
+                    gen_u = generate_memory(u, "$u", str(time_counter))  # word 단위.
                     contex_arr += gen_u
                     conversation_arr += gen_u
 
-                    r_index = []
+                    r_index = [] # 현재 response의 word단위 index.
                     gate = []
                     for key in r.split(' '):
                         if ENTPTR: 
@@ -206,20 +216,20 @@ def read_langs(file_name, entity, max_line = None):
                                 gate.append(0)  
                                 cnt_voc +=1 
                         else:
-                            index = [loc for loc, val in enumerate(contex_arr) if (val[0] == key)]
+                            index = [loc for loc, val in enumerate(contex_arr) if (val[0] == key)]  # 이때까지의 context에서 key가 나온적이 있다면 해당 위치들을 return
                             if (index):
-                                index = max(index)
-                                gate.append(1)
+                                index = max(index)  # 가장 가까운 pointer 위치
+                                gate.append(1)  # is pointer
                                 cnt_ptr +=1
                             else: 
-                                index = len(contex_arr)
+                                index = len(contex_arr)  # 이때까지 나온 발화의 word 수 + 1
                                 gate.append(0)  
                                 cnt_voc +=1             
                         r_index.append(index)
                         system_res_counter += 1 
 
-                    if len(r_index) > max_r_len: 
-                        max_r_len = len(r_index)
+                    if len(r_index) > max_r_len:
+                        max_r_len = len(r_index)  # response의 최대길이 측정.
                     contex_arr_temp = contex_arr + [['$$$$']*MEM_TOKEN_SIZE]
                     
                     ent = []
@@ -228,7 +238,7 @@ def read_langs(file_name, entity, max_line = None):
                             ent.append(key)
 
                     data.append([contex_arr_temp,r,r_index,gate,list(conversation_arr),ent,dialog_counter, kb_arr])
-                    gen_r = generate_memory(r, "$s", str(time_counter)) 
+                    gen_r = generate_memory(r, "$s", str(time_counter)) # word 단위로.
                     contex_arr += gen_r
                     conversation_arr += gen_r
 
@@ -240,7 +250,7 @@ def read_langs(file_name, entity, max_line = None):
                         temp = generate_memory(r, "", "")  
                         contex_arr += temp
                         kb_arr += temp
-            else:
+            else:  # '\n'
                 cnt_lin+=1
                 if(max_line and cnt_lin>=max_line):
                     break
@@ -295,14 +305,14 @@ def get_seq(pairs,lang,batch_size,type,max_len):
         ID.append(pair[6])
         kb_arr.append(pair[7])
         if(type):
-            lang.index_words(pair[0])
+            lang.index_words(pair[0])  # make vocab.
             lang.index_words(pair[1], trg=True)
     
     dataset = Dataset(x_seq, y_seq,ptr_seq,gate_seq,lang.word2index, lang.word2index,max_len, conv_seq,ent,ID,kb_arr)
     data_loader = torch.utils.data.DataLoader(dataset=dataset,
                                               batch_size=batch_size,
-                                              shuffle=type,
-                                              collate_fn=collate_fn)
+                                              shuffle=False,
+                                              collate_fn=collate_fn) # TODO shuffle True로 바꾸기.
     return data_loader
 
 def prepare_data_seq(task,batch_size=100,shuffle=True):
