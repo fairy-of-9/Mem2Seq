@@ -8,6 +8,10 @@ from models.enc_Luong import *
 from models.enc_PTRUNK import *
 from models.Mem2Seq import *
 
+'''
+main_train.py -lr=0.001 -layer=1 -hdd=128 -dr=0.2 -dec=Mem2Seq -bsz=8 -ds=babi -t=6
+'''
+
 BLEU = False
 
 if (args['decoder'] == "Mem2Seq"):

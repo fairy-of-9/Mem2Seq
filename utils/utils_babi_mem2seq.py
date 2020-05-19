@@ -68,7 +68,6 @@ class Dataset(data.Dataset):
 
     def __getitem__(self, index):
         """Returns one data pair (source and target)."""
-        print('get item')
         src_seq = self.src_seqs[index]
         trg_seq = self.trg_seqs[index]
         index_s = self.index_seqs[index]
@@ -118,10 +117,6 @@ class Dataset(data.Dataset):
 
 def collate_fn(data):  # padding data & transpose shape
     def merge(sequences,max_len):  # padding
-
-        for s in sequences:
-            print(s.shape)
-
         lengths = [len(seq) for seq in sequences]
         if (max_len):
             padded_seqs = torch.ones(len(sequences), max(lengths), MEM_TOKEN_SIZE).long()
@@ -134,10 +129,7 @@ def collate_fn(data):  # padding data & transpose shape
                 end = lengths[i]
                 padded_seqs[i, :end] = seq[:end]
 
-        print(padded_seqs.shape)
         return padded_seqs, lengths
-
-    print('collate_fn')
 
     # sort a list by sequence length (descending order) to use pack_padded_sequence
     data.sort(key=lambda x: len(x[0]), reverse=True)
@@ -149,10 +141,8 @@ def collate_fn(data):  # padding data & transpose shape
     ind_seqs, _ = merge(ind_seqs,None)
     gete_s, _ = merge(gete_s,None)
     conv_seqs, conv_lengths = merge(conv_seq, max_len)
-    print(src_seqs.shape)
     # src_seqs = 8 70 3
     src_seqs = Variable(src_seqs).transpose(0,1) # 70 8 3
-    print(src_seqs.shape)
     trg_seqs = Variable(trg_seqs).transpose(0,1)
     ind_seqs = Variable(ind_seqs).transpose(0,1)
     gete_s = Variable(gete_s).transpose(0,1)
