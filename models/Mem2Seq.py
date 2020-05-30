@@ -47,8 +47,8 @@ class Mem2Seq(nn.Module):
                 self.encoder = torch.load(str(path)+'/enc.th',lambda storage, loc: storage)
                 self.decoder = torch.load(str(path)+'/dec.th',lambda storage, loc: storage)
         else:
-            self.encoder = EncoderMemNN(lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask)
-            self.decoder = DecoderMemNN(lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask)
+            self.encoder = EncoderMemNN(config, lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask)
+            self.decoder = DecoderMemNN(config, lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask)
         # Initialize optimizers and criterion
         self.encoder_optimizer = optim.Adam(self.encoder.parameters(), lr=lr)
         self.decoder_optimizer = optim.Adam(self.decoder.parameters(), lr=lr)
@@ -96,7 +96,7 @@ class Mem2Seq(nn.Module):
         loss_Vocab,loss_Ptr= 0,0
 
         # Run words through encoder
-        decoder_hidden = self.encoder(self.config, input_batches).unsqueeze(0)
+        decoder_hidden = self.encoder(input_batches).unsqueeze(0)
         self.decoder.load_memory(input_batches.transpose(0,1))
 
         # Prepare input and output variables
@@ -118,14 +118,14 @@ class Mem2Seq(nn.Module):
         if use_teacher_forcing:    
             # Run through decoder one time step at a time
             for t in range(max_target_length):
-                decoder_ptr, decoder_vacab, decoder_hidden  = self.decoder.ptrMemDecoder(self.config, decoder_input, decoder_hidden)
+                decoder_ptr, decoder_vacab, decoder_hidden  = self.decoder.ptrMemDecoder(decoder_input, decoder_hidden)
                 all_decoder_outputs_vocab[t] = decoder_vacab
                 all_decoder_outputs_ptr[t] = decoder_ptr
                 decoder_input = target_batches[t]# Chosen word is next input
                 if USE_CUDA: decoder_input = decoder_input.cuda()            
         else:
             for t in range(max_target_length):
-                decoder_ptr, decoder_vacab, decoder_hidden = self.decoder.ptrMemDecoder(self.config, decoder_input, decoder_hidden)
+                decoder_ptr, decoder_vacab, decoder_hidden = self.decoder.ptrMemDecoder(decoder_input, decoder_hidden)
                 _, toppi = decoder_ptr.data.topk(1)
                 _, topvi = decoder_vacab.data.topk(1)
                 all_decoder_outputs_vocab[t] = decoder_vacab
@@ -396,13 +396,14 @@ class Mem2Seq(nn.Module):
 
 
 class EncoderMemNN(nn.Module):
-    def __init__(self, vocab, embedding_dim, hop, dropout, unk_mask):
+    def __init__(self, config, vocab, embedding_dim, hop, dropout, unk_mask):
         super(EncoderMemNN, self).__init__()
         self.num_vocab = vocab
         self.max_hops = hop
         self.embedding_dim = embedding_dim
         self.dropout = dropout
         self.unk_mask = unk_mask
+        self.config = config
         for hop in range(self.max_hops+1):
             C = nn.Embedding(self.num_vocab, embedding_dim, padding_idx=PAD_token)
             C.weight.data.normal_(0, 0.1)
@@ -419,7 +420,7 @@ class EncoderMemNN(nn.Module):
             return Variable(torch.zeros(bsz, self.embedding_dim))
 
 
-    def forward(self, config, story):
+    def forward(self, story):
         story = story.transpose(0,1)
         story_size = story.size() # b * m * 3 
         if self.unk_mask:
@@ -435,7 +436,7 @@ class EncoderMemNN(nn.Module):
             embed_A = self.C[hop](story.contiguous().view(story.size(0), -1).long()) # b * (m * s) * e
             embed_A = embed_A.view(story_size+(embed_A.size(-1),)) # b * m * s * e
 
-            if config['triple_emb']:  # FFNN(3*e) -> e
+            if self.config['triple_emb']:  # FFNN(3*e) -> e
                 embed_A = embed_A.view(torch.Size([embed_A.size(0),embed_A.size(1),embed_A.size(2)*embed_A.size(3)]))  # b * m * (s * e)
                 m_A = self.FFNN(embed_A)
             else:
@@ -454,13 +455,14 @@ class EncoderMemNN(nn.Module):
         return u_k
 
 class DecoderMemNN(nn.Module):
-    def __init__(self, vocab, embedding_dim, hop, dropout, unk_mask):
+    def __init__(self, config, vocab, embedding_dim, hop, dropout, unk_mask):
         super(DecoderMemNN, self).__init__()
         self.num_vocab = vocab
         self.max_hops = hop
         self.embedding_dim = embedding_dim
         self.dropout = dropout
         self.unk_mask = unk_mask
+        self.config = config
         for hop in range(self.max_hops+1):
             C = nn.Embedding(self.num_vocab, embedding_dim, padding_idx=PAD_token)
             C.weight.data.normal_(0, 0.1)
@@ -495,7 +497,7 @@ class DecoderMemNN(nn.Module):
             self.m_story.append(m_A)
         self.m_story.append(m_C)
 
-    def ptrMemDecoder(self, config, enc_query, last_hidden):
+    def ptrMemDecoder(self, enc_query, last_hidden):
         embed_q = self.C[0](enc_query) # b * e
         output, hidden = self.gru(embed_q.unsqueeze(0), last_hidden)
         temp = []
