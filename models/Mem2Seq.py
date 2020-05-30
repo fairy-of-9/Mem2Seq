@@ -118,14 +118,14 @@ class Mem2Seq(nn.Module):
         if use_teacher_forcing:    
             # Run through decoder one time step at a time
             for t in range(max_target_length):
-                decoder_ptr, decoder_vacab, decoder_hidden  = self.decoder.ptrMemDecoder(decoder_input, decoder_hidden)
+                decoder_ptr, decoder_vacab, decoder_hidden  = self.decoder.ptrMemDecoder(self.config, decoder_input, decoder_hidden)
                 all_decoder_outputs_vocab[t] = decoder_vacab
                 all_decoder_outputs_ptr[t] = decoder_ptr
                 decoder_input = target_batches[t]# Chosen word is next input
                 if USE_CUDA: decoder_input = decoder_input.cuda()            
         else:
             for t in range(max_target_length):
-                decoder_ptr, decoder_vacab, decoder_hidden = self.decoder.ptrMemDecoder(decoder_input, decoder_hidden)
+                decoder_ptr, decoder_vacab, decoder_hidden = self.decoder.ptrMemDecoder(self.config, decoder_input, decoder_hidden)
                 _, toppi = decoder_ptr.data.topk(1)
                 _, topvi = decoder_vacab.data.topk(1)
                 all_decoder_outputs_vocab[t] = decoder_vacab
@@ -495,7 +495,7 @@ class DecoderMemNN(nn.Module):
             self.m_story.append(m_A)
         self.m_story.append(m_C)
 
-    def ptrMemDecoder(self, enc_query, last_hidden):
+    def ptrMemDecoder(self, config, enc_query, last_hidden):
         embed_q = self.C[0](enc_query) # b * e
         output, hidden = self.gru(embed_q.unsqueeze(0), last_hidden)
         temp = []
