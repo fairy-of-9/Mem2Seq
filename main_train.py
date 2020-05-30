@@ -7,12 +7,17 @@ from models.enc_vanilla import *
 from models.enc_Luong import *
 from models.enc_PTRUNK import *
 from models.Mem2Seq import *
+import yaml
 
 '''
-main_train.py -lr=0.001 -layer=1 -hdd=128 -dr=0.2 -dec=Mem2Seq -bsz=8 -ds=babi -t=6
+CUDA_VISIBLE_DEVICES=3 python main_train.py -lr=0.001 -layer=1 -hdd=128 -dr=0.2 -dec=Mem2Seq -bsz=8 -ds=babi -t=6
 '''
 
 BLEU = False
+
+with open(os.path.join('config', 'config.yaml'), 'r') as f:
+    config = yaml.load(f)
+
 
 if (args['decoder'] == "Mem2Seq"):
     if args['dataset']=='kvr':
@@ -38,7 +43,7 @@ cnt_1 = 0
 train, dev, test, testOOV, lang, max_len, max_r = prepare_data_seq(args['task'],batch_size=int(args['batch']),shuffle=True)
 
 if args['decoder'] == "Mem2Seq":
-    model = globals()[args['decoder']](int(args['hidden']),
+    model = globals()[args['decoder']](config, int(args['hidden']),
                                         max_len,max_r,lang,args['path'],args['task'],
                                         lr=float(args['learn']),
                                         n_layers=int(args['layer']), 
@@ -46,7 +51,7 @@ if args['decoder'] == "Mem2Seq":
                                         unk_mask=bool(int(args['unk_mask']))
                                     )
 else:
-    model = globals()[args['decoder']](int(args['hidden']),
+    model = globals()[args['decoder']](config, int(args['hidden']),
                                     max_len,max_r,lang,args['path'],args['task'],
                                     lr=float(args['learn']),
                                     n_layers=int(args['layer']), 

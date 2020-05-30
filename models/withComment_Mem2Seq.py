@@ -444,7 +444,7 @@ class EncoderMemNN(nn.Module):
             # u[-1] = [b, emb_dim],
             # u[-1].unsqueeze(1) = [b, 1, emb_dim]
 
-            prob   = self.softmax(torch.sum(m_A * u_temp, 2))  #p^k   8, 70   128 dim 간 elemental-wise * 이후 sum으로 합침.  해당 word의 emb(128)가 query vector(128)와 얼마나 유사한가
+            prob   = self.softmax(torch.sum(m_A * u_temp, 2))  #p^k   8, 70   128 dim 간 elemental-wise * 이후 sum으로 합침. (dot-prod)  해당 word의 emb(128)가 query vector(128)와 얼마나 유사한가
             embed_C = self.C[hop+1](story.contiguous().view(story.size(0), -1).long()) #C^k+1    8 210 128
             embed_C = embed_C.view(story_size+(embed_C.size(-1),))    # 8 70 3 128
             m_C = torch.sum(embed_C, 2).squeeze(2)  # 8 70 128

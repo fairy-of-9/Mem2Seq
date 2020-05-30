@@ -21,8 +21,9 @@ import json
 from utils.until_temp import entityList
 
 class Mem2Seq(nn.Module):
-    def __init__(self, hidden_size, max_len, max_r, lang, path, task, lr, n_layers, dropout, unk_mask):
+    def __init__(self, config, hidden_size, max_len, max_r, lang, path, task, lr, n_layers, dropout, unk_mask):
         super(Mem2Seq, self).__init__()
+        self.config = config
         self.name = "Mem2Seq"
         self.task = task
         self.input_size = lang.n_words
@@ -95,7 +96,7 @@ class Mem2Seq(nn.Module):
         loss_Vocab,loss_Ptr= 0,0
 
         # Run words through encoder
-        decoder_hidden = self.encoder(input_batches).unsqueeze(0)
+        decoder_hidden = self.encoder(self.config, input_batches).unsqueeze(0)
         self.decoder.load_memory(input_batches.transpose(0,1))
 
         # Prepare input and output variables
@@ -408,6 +409,7 @@ class EncoderMemNN(nn.Module):
             self.add_module("C_{}".format(hop), C)
         self.C = AttrProxy(self, "C_")
         self.softmax = nn.Softmax(dim=1)
+        self.FFNN = nn.Linear(embedding_dim*3, embedding_dim)
         
     def get_state(self,bsz):
         """Get cell states and hidden states."""
@@ -417,7 +419,7 @@ class EncoderMemNN(nn.Module):
             return Variable(torch.zeros(bsz, self.embedding_dim))
 
 
-    def forward(self, story):
+    def forward(self, config, story):
         story = story.transpose(0,1)
         story_size = story.size() # b * m * 3 
         if self.unk_mask:
@@ -432,7 +434,12 @@ class EncoderMemNN(nn.Module):
         for hop in range(self.max_hops):
             embed_A = self.C[hop](story.contiguous().view(story.size(0), -1).long()) # b * (m * s) * e
             embed_A = embed_A.view(story_size+(embed_A.size(-1),)) # b * m * s * e
-            m_A = torch.sum(embed_A, 2).squeeze(2) # b * m * e
+
+            if config['triple_emb']:  # FFNN(3*e) -> e
+                embed_A = embed_A.view(torch.Size([embed_A.size(0),embed_A.size(1),embed_A.size(2)*embed_A.size(3)]))  # b * m * (s * e)
+                m_A = self.FFNN(embed_A)
+            else:
+                m_A = torch.sum(embed_A, 2).squeeze(2) # b * m * e
 
             u_temp = u[-1].unsqueeze(1).expand_as(m_A)
             prob   = self.softmax(torch.sum(m_A*u_temp, 2))  
