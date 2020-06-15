@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b91fe3-67fc-4487-be75-80b33e256506" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/models/PositionalEncoding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Mem2Seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Mem2Seq.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -11,54 +16,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_train.coverage" NAME="main_train Coverage Results" MODIFIED="1590854343178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-  </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/models/withComment_Mem2Seq.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="319">
-                    <caret line="433" column="49" selection-start-line="433" selection-start-column="49" selection-end-line="433" selection-end-column="49" />
-                    <folding>
-                      <element signature="e#0#12#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
+    <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_test.coverage" NAME="main_test Coverage Results" MODIFIED="1591505813913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_train.coverage" NAME="main_train Coverage Results" MODIFIED="1591507923421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1306778481/builtins.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="163">
+              <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -67,10 +34,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/config.yaml">
+        <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="10" selection-end-column="10" />
+            <state relative-caret-position="418">
+              <caret line="22" column="85" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="627">
+              <caret line="42" column="55" selection-start-line="42" selection-start-column="55" selection-end-line="42" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Mem2Seq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="127" column="88" selection-start-line="127" selection-start-column="88" selection-end-line="127" selection-end-column="88" />
+            <state relative-caret-position="6080">
+              <caret line="341" column="41" selection-start-line="341" selection-start-column="41" selection-end-line="341" selection-end-column="41" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -88,10 +67,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/module.py">
+        <entry file="file://$PROJECT_DIR$/utils/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9215">
-              <caret line="492" selection-start-line="492" selection-end-line="492" />
+            <state relative-caret-position="684">
+              <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/withComment_Mem2Seq.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="8550">
+              <caret line="470" column="40" selection-start-line="470" selection-start-column="40" selection-end-line="470" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/utils_babi_mem2seq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4902">
-              <caret line="258" column="74" selection-start-line="258" selection-start-column="74" selection-end-line="258" selection-end-column="74" />
+            <state relative-caret-position="5453">
+              <caret line="305" column="22" selection-start-line="305" selection-start-column="22" selection-end-line="305" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -110,25 +104,45 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>t</find>
+      <find>collate_fn</find>
+      <find>print(</find>
+      <find>self.sco</find>
+      <find>def evaluate</find>
+      <find>epoch</find>
+      <find>acc</find>
+      <find>evalp</find>
+      <find>Epoch:</find>
+      <find>self.sc</find>
+      <find>self</find>
+      <find>scores</find>
+      <find>dec</find>
+      <find>task</find>
+      <find>globals()</find>
       <find>prepare</find>
-      <find>args</find>
-      <find>print</find>
+      <find>read_langs</find>
+      <find>train</find>
+      <find>OOV</find>
+      <find>mask</find>
+      <find>shuffle</find>
+      <find>kb</find>
+      <find>useKB</find>
+      <find>USEKB</find>
+      <find>train_batch</find>
       <find>save</find>
-      <find>self.softmax(torch.sum</find>
-      <find>embed_A = embed_A.view(story_s</find>
-      <find>for</find>
-      <find>model</find>
-      <find>train_</find>
-      <find>evaluate_batch</find>
+      <find>args['evalp']</find>
+      <find>args</find>
       <find>evaluate</find>
-      <find>evaluate(</find>
-      <find>forward</find>
-      <find>EncoderMemNN</find>
-      <find>c</find>
-      <find>config</find>
+      <find>evaluate_batch</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,17 +153,20 @@
       <list>
         <option value="$PROJECT_DIR$/utils/utils_babi_mem2seq.py" />
         <option value="$PROJECT_DIR$/models/withComment_Mem2Seq.py" />
+        <option value="$PROJECT_DIR$/models/PositionalEncoding.py" />
         <option value="$PROJECT_DIR$/config/config.yaml" />
-        <option value="$PROJECT_DIR$/main_train.py" />
+        <option value="$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt" />
+        <option value="$PROJECT_DIR$/main_test.py" />
         <option value="$PROJECT_DIR$/models/Mem2Seq.py" />
+        <option value="$PROJECT_DIR$/main_train.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1937" />
-    <option name="height" value="1056" />
+    <option name="x" value="-14" />
+    <option name="y" value="-17" />
+    <option name="width" value="1932" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -178,7 +195,18 @@
             <path>
               <item name="kbox_Mem2Seq" type="b2602c69:ProjectViewProjectNode" />
               <item name="kbox_Mem2Seq" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="dialog-bAbI-tasks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kbox_Mem2Seq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kbox_Mem2Seq" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kbox_Mem2Seq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kbox_Mem2Seq" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -190,7 +218,7 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -204,7 +232,32 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main_train">
+    <configuration name="main_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="kbox_Mem2Seq" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+        <env name="CUDA_VISIBLE_DEVICES" value="1" />
+        <env name="CUDA_HOME" value="/usr/local/cuda-9.0" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_test.py" />
+      <option name="PARAMETERS" value="-dec=Mem2Seq -path=save/mem2seq-BABI/5HDD256BSZ64DR0.2L3lr0.001Mem2Seq0.9724805363321799 -bsz=32 -ds=babi -t=5" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kbox_Mem2Seq" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,6 +286,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_train" />
+        <item itemvalue="Python.main_test" />
       </list>
     </recent_temporary>
   </component>
@@ -251,30 +305,38 @@
       <workItem from="1590382621641" duration="1777000" />
       <workItem from="1590468676182" duration="128000" />
       <workItem from="1590737019971" duration="2114000" />
-      <workItem from="1590830298250" duration="1324000" />
+      <workItem from="1590830298250" duration="5652000" />
+      <workItem from="1591077582806" duration="15000" />
+      <workItem from="1591169251246" duration="4282000" />
+      <workItem from="1591173670691" duration="2541000" />
+      <workItem from="1591237242595" duration="6736000" />
+      <workItem from="1591352648556" duration="7230000" />
+      <workItem from="1591452204030" duration="436000" />
+      <workItem from="1591505318091" duration="4539000" />
+      <workItem from="1591690076444" duration="22000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8412000" />
+    <option name="totallyTimeSpent" value="38541000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20242915" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18923241" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35765123" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.19572954" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.335141" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.19197397" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="File Transfer" order="9" weight="0.29181495" />
+      <window_info anchor="bottom" id="File Transfer" order="9" weight="0.18112798" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
@@ -295,8 +357,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/models/Mem2Seq.py</url>
-          <line>423</line>
+          <line>450</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py</url>
+          <line>285</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main_train.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main_train.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -311,79 +388,85 @@
         <watch expression="torch.Size([embed_A.size(0),embed_A.size(1),embed_A.size(2)*embed_A.size(3)])" language="Python" />
         <watch expression="embed_A.size()" language="Python" />
         <watch expression="m_A.size()" language="Python" />
+        <watch expression="cur_tume" language="Python" />
+        <watch expression="args['evalp']" language="Python" />
+        <watch expression="directory" language="Python" />
+        <watch expression="args[&quot;task&quot;]" language="Python" />
+        <watch expression="data[0].shape" language="Python" />
+        <watch expression="data[2].shape" language="Python" />
+        <watch expression="pair_train" language="Python" />
+        <watch expression="x_seq" language="Python" />
+        <watch expression="y_seq" language="Python" />
+        <watch expression="data[0]" language="Python" />
+        <watch expression="data[1]" language="Python" />
+        <watch expression="data[8]" language="Python" />
+        <watch expression="data[:10]" language="Python" />
+        <watch expression="args['evalp']" language="Python" />
+        <watch expression="args" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>m_A.size()</expression-string>
+        <expression-string>args</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>embed_A.size()</expression-string>
+        <expression-string>args['evalp']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>embed_A.size</expression-string>
+        <expression-string>data[:10]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>torch.Size([embed_A.size(0),embed_A.size(1),embed_A.size(2)*embed_A.size(3)])</expression-string>
+        <expression-string>data[8]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>embed_A.size(0)+embed_A.size(1)</expression-string>
+        <expression-string>data[1]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>story_size+(embed_A.size(-1),)</expression-string>
+        <expression-string>data[0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>embed_A.size(-1)</expression-string>
+        <expression-string>y_seq</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>story_size</expression-string>
+        <expression-string>x_seq</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>embed_A.shape</expression-string>
+        <expression-string>pair_train</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>data[2].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="846">
-          <caret line="307" column="4" selection-start-line="307" selection-start-column="4" selection-end-line="307" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main_nmt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/rnn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-576">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
@@ -394,70 +477,122 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/enc_vanilla.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="76" column="8" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1306778481/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="10" selection-end-column="10" />
+        <state relative-caret-position="19">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/module.py">
+    <entry file="file://$PROJECT_DIR$/models/PositionalEncoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9215">
-          <caret line="492" selection-start-line="492" selection-end-line="492" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utils_babi_mem2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4902">
-          <caret line="258" column="74" selection-start-line="258" selection-start-column="74" selection-end-line="258" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/withComment_Mem2Seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="433" column="49" selection-start-line="433" selection-start-column="49" selection-end-line="433" selection-end-column="49" />
+        <state relative-caret-position="57">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_test.py">
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/rnn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="2185">
+          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4883">
+          <caret line="264" selection-start-line="264" selection-end-line="264" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="831">
+          <caret line="322" column="26" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1306778481/builtins.py">
+    <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="4" />
+        <state relative-caret-position="418">
+          <caret line="22" column="85" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="42" column="55" selection-start-line="42" selection-start-column="55" selection-end-line="42" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/Mem2Seq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="127" column="88" selection-start-line="127" selection-start-column="88" selection-end-line="127" selection-end-column="88" />
+        <state relative-caret-position="6080">
+          <caret line="341" column="41" selection-start-line="341" selection-start-column="41" selection-end-line="341" selection-end-column="41" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_train.py">
+    <entry file="file://$PROJECT_DIR$/utils/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="31" lean-forward="true" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        <state relative-caret-position="684">
+          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/withComment_Mem2Seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8550">
+          <caret line="470" column="40" selection-start-line="470" selection-start-column="40" selection-end-line="470" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utils_babi_mem2seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5453">
+          <caret line="305" column="22" selection-start-line="305" selection-start-column="22" selection-end-line="305" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

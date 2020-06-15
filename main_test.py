@@ -7,9 +7,10 @@ from models.enc_vanilla import *
 from models.enc_Luong import *
 from models.enc_PTRUNK import *
 from models.Mem2Seq import *
+import yaml
 
 '''
-python3 main_test.py -dec= -path= -bsz= -ds=
+CUDA_VISIBLE_DEVICES=3 python main_test.py -dec=Mem2Seq -path=save/mem2seq-BABI/5HDD256BSZ64DR0.2L3lr0.001Mem2Seq0.9724805363321799 -bsz=32 -ds=babi -t=5
 '''
 
 BLEU = False
@@ -39,12 +40,15 @@ L = directory[2].split('L')[1].split('lr')[0]
 
 train, dev, test, testOOV, lang, max_len, max_r = prepare_data_seq(task, batch_size=int(args['batch']))
 
+with open(os.path.join('config', 'config.yaml'), 'r') as f:
+    config = yaml.load(f)
+
 if args['decoder'] == "Mem2Seq":
     model = globals()[args['decoder']](
-        int(HDD),max_len,max_r,lang,args['path'],task, lr=0.0, n_layers=int(L), dropout=0.0, unk_mask=0)
+        config, int(HDD),max_len,max_r,lang,args['path'],task, lr=0.0, n_layers=int(L), dropout=0.0, unk_mask=0)
 else:
     model = globals()[args['decoder']](
-        int(HDD),max_len,max_r,lang,args['path'],task, lr=0.0, n_layers=int(L), dropout=0.0)
+        config, int(HDD),max_len,max_r,lang,args['path'],task, lr=0.0, n_layers=int(L), dropout=0.0)
 
 acc_test = model.evaluate(test, 1e6, BLEU) 
 print(acc_test)

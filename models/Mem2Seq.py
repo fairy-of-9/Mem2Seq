@@ -7,6 +7,7 @@ import torch.nn.functional as F
 from utils.masked_cross_entropy import *
 from utils.config import *
 import random
+from models.PositionalEncoding import *
 import numpy as np
 import datetime
 from utils.measures import wer, moses_multi_bleu
@@ -36,6 +37,9 @@ class Mem2Seq(nn.Module):
         self.n_layers = n_layers
         self.dropout = dropout
         self.unk_mask = unk_mask
+        self.ffnn = nn.Linear(hidden_size* 3, hidden_size)
+        self.score = {"epoch":-1, "dialog":-1, "F1":-1, "BLEU": -1}
+
         
         if path:
             if USE_CUDA:
@@ -47,8 +51,8 @@ class Mem2Seq(nn.Module):
                 self.encoder = torch.load(str(path)+'/enc.th',lambda storage, loc: storage)
                 self.decoder = torch.load(str(path)+'/dec.th',lambda storage, loc: storage)
         else:
-            self.encoder = EncoderMemNN(config, lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask)
-            self.decoder = DecoderMemNN(config, lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask)
+            self.encoder = EncoderMemNN(config, lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask, self.max_len, self.ffnn)
+            self.decoder = DecoderMemNN(config, lang.n_words, hidden_size, n_layers, self.dropout, self.unk_mask, self.max_len, self.ffnn)
         # Initialize optimizers and criterion
         self.encoder_optimizer = optim.Adam(self.encoder.parameters(), lr=lr)
         self.decoder_optimizer = optim.Adam(self.decoder.parameters(), lr=lr)
@@ -350,6 +354,7 @@ class Mem2Seq(nn.Module):
                 if len(dialog_acc_dict[k])==sum(dialog_acc_dict[k]):
                     dia_acc += 1
             logging.info("Dialog Accuracy:\t"+str(dia_acc*1.0/len(dialog_acc_dict.keys())))
+            print("Dialog Accuracy:\t"+str(dia_acc*1.0/len(dialog_acc_dict.keys())))
 
         if args['dataset']=='kvr':
             logging.info("F1 SCORE:\t{}".format(microF1_TRUE/float(microF1_PRED)))
@@ -358,20 +363,40 @@ class Mem2Seq(nn.Module):
             logging.info("\tNAV F1:\t{}".format(microF1_TRUE_nav/float(microF1_PRED_nav))) 
         elif args['dataset']=='babi' and int(args["task"])==6:
             logging.info("F1 SCORE:\t{}".format(microF1_TRUE/float(microF1_PRED)))
+            print("F1 SCORE:\t{}".format(microF1_TRUE / float(microF1_PRED)))
+            self.score['F1'] = microF1_TRUE / float(microF1_PRED)
+
               
         bleu_score = moses_multi_bleu(np.array(hyp), np.array(ref), lowercase=True) 
-        logging.info("BLEU SCORE:"+str(bleu_score))     
-        if (BLEU):                                                               
-            if (bleu_score >= avg_best):
-                self.save_model(str(self.name)+str(bleu_score))
-                logging.info("MODEL SAVED")  
-            return bleu_score
-        else:
-            acc_avg = acc_avg/float(len(dev))
-            if (acc_avg >= avg_best):
-                self.save_model(str(self.name)+str(acc_avg))
-                logging.info("MODEL SAVED")
-            return acc_avg
+        logging.info("BLEU SCORE:"+str(bleu_score))
+        print("BLEU SCORE:" + str(bleu_score))
+
+        self.score['dialog'] = dia_acc * 1.0 / len(dialog_acc_dict.keys())
+        self.score['BLEU'] = bleu_score
+
+        dial_score = (dia_acc*1.0/len(dialog_acc_dict.keys()))
+        if (dial_score >= avg_best):
+            self.save_model(str(self.name) + str(dial_score))
+            logging.info("MODEL SAVED")
+            print("MODEL SAVED")
+
+        return dial_score, self.score
+
+        # if (BLEU):
+        #     if (bleu_score >= avg_best):
+        #         self.save_model(str(self.name)+str(bleu_score))
+        #         logging.info("MODEL SAVED")
+        #         print("MODEL SAVED")
+        #
+        #
+        #     return bleu_score, self.score
+        # else:
+        #     acc_avg = acc_avg/float(len(dev))
+        #     if (acc_avg >= avg_best):
+        #         self.save_model(str(self.name)+str(acc_avg))
+        #         logging.info("MODEL SAVED")
+        #         print("MODEL SAVED")
+        #     return acc_avg, self.score
 
     def compute_prf(self, gold, pred, global_entity_list, kb_plain):
         local_kb_word = [k[0] for k in kb_plain]
@@ -396,7 +421,7 @@ class Mem2Seq(nn.Module):
 
 
 class EncoderMemNN(nn.Module):
-    def __init__(self, config, vocab, embedding_dim, hop, dropout, unk_mask):
+    def __init__(self, config, vocab, embedding_dim, hop, dropout, unk_mask, max_len, ffnn):
         super(EncoderMemNN, self).__init__()
         self.num_vocab = vocab
         self.max_hops = hop
@@ -404,13 +429,15 @@ class EncoderMemNN(nn.Module):
         self.dropout = dropout
         self.unk_mask = unk_mask
         self.config = config
+        self.pos_enc = PositionalEncoding(embedding_dim, max_len)
+
         for hop in range(self.max_hops+1):
             C = nn.Embedding(self.num_vocab, embedding_dim, padding_idx=PAD_token)
             C.weight.data.normal_(0, 0.1)
             self.add_module("C_{}".format(hop), C)
         self.C = AttrProxy(self, "C_")
         self.softmax = nn.Softmax(dim=1)
-        self.FFNN = nn.Linear(embedding_dim*3, embedding_dim)
+        self.ffnn = ffnn
         
     def get_state(self,bsz):
         """Get cell states and hidden states."""
@@ -438,24 +465,35 @@ class EncoderMemNN(nn.Module):
 
             if self.config['triple_emb']:  # FFNN(3*e) -> e
                 embed_A = embed_A.view(torch.Size([embed_A.size(0),embed_A.size(1),embed_A.size(2)*embed_A.size(3)]))  # b * m * (s * e)
-                m_A = self.FFNN(embed_A)
+                m_A = self.ffnn(embed_A)
             else:
                 m_A = torch.sum(embed_A, 2).squeeze(2) # b * m * e
+
+            if self.config['positional_emb']:
+                m_A = self.pos_enc(m_A)
 
             u_temp = u[-1].unsqueeze(1).expand_as(m_A)
             prob   = self.softmax(torch.sum(m_A*u_temp, 2))  
             embed_C = self.C[hop+1](story.contiguous().view(story.size(0), -1).long())
-            embed_C = embed_C.view(story_size+(embed_C.size(-1),)) 
-            m_C = torch.sum(embed_C, 2).squeeze(2)
+            embed_C = embed_C.view(story_size+(embed_C.size(-1),))
+
+            if self.config['triple_emb']:  # FFNN(3*e) -> e
+                embed_C = embed_C.view(torch.Size([embed_C.size(0),embed_C.size(1),embed_C.size(2)*embed_C.size(3)]))  # b * m * (s * e)
+                m_C = self.ffnn(embed_C)
+            else:
+                m_C = torch.sum(embed_C, 2).squeeze(2) # b * m * e
+
+            if self.config['positional_emb']:
+                m_C = self.pos_enc(m_C)
 
             prob = prob.unsqueeze(2).expand_as(m_C)
             o_k  = torch.sum(m_C*prob, 1)
             u_k = u[-1] + o_k
-            u.append(u_k)   
+            u.append(u_k)
         return u_k
 
 class DecoderMemNN(nn.Module):
-    def __init__(self, config, vocab, embedding_dim, hop, dropout, unk_mask):
+    def __init__(self, config, vocab, embedding_dim, hop, dropout, unk_mask, max_len, ffnn):
         super(DecoderMemNN, self).__init__()
         self.num_vocab = vocab
         self.max_hops = hop
@@ -472,6 +510,8 @@ class DecoderMemNN(nn.Module):
         self.W = nn.Linear(embedding_dim,1)
         self.W1 = nn.Linear(2*embedding_dim,self.num_vocab)
         self.gru = nn.GRU(embedding_dim, embedding_dim, dropout=dropout)
+        self.ffnn = ffnn
+        self.pos_enc = PositionalEncoding(embedding_dim, max_len)
 
     def load_memory(self, story):
         story_size = story.size() # b * m * 3 
@@ -488,11 +528,30 @@ class DecoderMemNN(nn.Module):
         for hop in range(self.max_hops):
             embed_A = self.C[hop](story.contiguous().view(story.size(0), -1))#.long()) # b * (m * s) * e
             embed_A = embed_A.view(story_size+(embed_A.size(-1),)) # b * m * s * e
-            embed_A = torch.sum(embed_A, 2).squeeze(2) # b * m * e
-            m_A = embed_A    
+
+            if self.config['triple_emb']:
+                embed_A = embed_A.view(torch.Size([embed_A.size(0), embed_A.size(1), embed_A.size(2) * embed_A.size(3)]))
+                embed_A = self.ffnn(embed_A)
+            else:
+                embed_A = torch.sum(embed_A, 2).squeeze(2) # b * m * e
+
+            if self.config['positional_emb']:
+                embed_A = self.pos_enc(embed_A)
+
+            m_A = embed_A
+
             embed_C = self.C[hop+1](story.contiguous().view(story.size(0), -1).long())
-            embed_C = embed_C.view(story_size+(embed_C.size(-1),)) 
-            embed_C = torch.sum(embed_C, 2).squeeze(2)
+            embed_C = embed_C.view(story_size+(embed_C.size(-1),))
+
+            if self.config['triple_emb']:
+                embed_C = embed_C.view(torch.Size([embed_C.size(0), embed_C.size(1), embed_C.size(2) * embed_C.size(3)]))
+                embed_C = self.ffnn(embed_C)
+            else:
+                embed_C = torch.sum(embed_C, 2).squeeze(2) # b * m * e
+
+            if self.config['positional_emb']:
+                embed_C = self.pos_enc(embed_C)
+
             m_C = embed_C
             self.m_story.append(m_A)
         self.m_story.append(m_C)
