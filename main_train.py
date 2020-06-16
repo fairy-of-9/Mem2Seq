@@ -12,7 +12,7 @@ import csv
 from copy import deepcopy
 
 '''
-CUDA_VISIBLE_DEVICES=3 python main_train.py -lr=0.001 -layer=1 -hdd=128 -dr=0.2 -dec=Mem2Seq -bsz=8 -ds=babi -t=6
+CUDA_VISIBLE_DEVICES=2 python main_train.py -lr=0.001 -layer=3 -hdd=256 -dr=0.2 -dec=Mem2Seq -bsz=256 -ds=babi -t=6 
 '''
 
 import time
@@ -103,7 +103,7 @@ for epoch in range(500):
             cnt=0
         else:
             cnt+=1
-        # if(cnt == 5): break
+        if(cnt == 5): break
         if(acc == 1.0): break 
 
 
