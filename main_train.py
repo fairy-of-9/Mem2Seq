@@ -99,6 +99,7 @@ for epoch in range(500):
         if 'Mem2Seq' in args['decoder']:
             model.scheduler.step(acc)
         if(acc >= avg_best):
+            print('better acc {} -> {}'.format(avg_best, acc))
             avg_best = acc
             cnt=0
         else:

@@ -375,12 +375,12 @@ class Mem2Seq(nn.Module):
         self.score['BLEU'] = bleu_score
 
         dial_score = (dia_acc*1.0/len(dialog_acc_dict.keys()))
-        if (dial_score >= avg_best):
-            self.save_model(str(self.name) + str(dial_score))
+        if (bleu_score >= avg_best):
+            self.save_model(str(self.name) + str(bleu_score))
             logging.info("MODEL SAVED")
             print("MODEL SAVED")
 
-        return dial_score, self.score
+        return bleu_score, self.score
 
         # if (BLEU):
         #     if (bleu_score >= avg_best):
