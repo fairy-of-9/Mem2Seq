@@ -50,10 +50,9 @@ else:
     model = globals()[args['decoder']](
         config, int(HDD),max_len,max_r,lang,args['path'],task, lr=0.0, n_layers=int(L), dropout=0.0)
 
-acc_test = model.evaluate(test, 1e6, BLEU) 
+acc_test = model.evaluate(test, 1e6, 0, BLEU)
 print(acc_test)
 if testOOV!=[]:
-    acc_oov_test = model.evaluate(testOOV,1e6,BLEU) 
+    acc_oov_test = model.evaluate(testOOV,1e6,0,BLEU)
     print(acc_oov_test)
-
 

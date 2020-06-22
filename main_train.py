@@ -89,7 +89,7 @@ for epoch in range(500):
     if epoch < 50:
         continue
     if((epoch+1) % int(args['evalp']) == 0):
-        acc, score = model.evaluate(dev,avg_best, BLEU)
+        acc, score = model.evaluate(dev,avg_best, epoch+1, BLEU)
         cp = deepcopy(score)
         scores.append(cp)
 
@@ -110,14 +110,16 @@ for epoch in range(500):
 
 max_f1 = 0
 max_epoch = -1
+max_i = -1
 for i, score in enumerate(scores):
     epoch = (i + 1) * int(args['evalp'])
     if max_f1 < score['F1']:
         max_f1 = score['F1']
         max_epoch = epoch
+        max_i = i
 
 print("BEST_EPOCH: {}".format(max_epoch))
-print(scores[max_epoch - 1])
+print(scores[i])
 
 
 

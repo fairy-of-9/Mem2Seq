@@ -248,7 +248,7 @@ class Mem2Seq(nn.Module):
         return decoded_words #, acc_ptr, acc_vac
 
 
-    def evaluate(self,dev,avg_best,BLEU=False):
+    def evaluate(self,dev,avg_best,epoch, BLEU=False):
         logging.info("STARTING EVALUATION")
         acc_avg = 0.0
         wer_avg = 0.0
@@ -376,7 +376,7 @@ class Mem2Seq(nn.Module):
 
         dial_score = (dia_acc*1.0/len(dialog_acc_dict.keys()))
         if (bleu_score >= avg_best):
-            self.save_model(str(self.name) + str(bleu_score))
+            self.save_model(str(self.name) + str(bleu_score) + '_' + str(epoch))
             logging.info("MODEL SAVED")
             print("MODEL SAVED")
 
