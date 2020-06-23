@@ -374,29 +374,144 @@ class Mem2Seq(nn.Module):
         self.score['dialog'] = dia_acc * 1.0 / len(dialog_acc_dict.keys())
         self.score['BLEU'] = bleu_score
 
-        dial_score = (dia_acc*1.0/len(dialog_acc_dict.keys()))
-        if (bleu_score >= avg_best):
-            self.save_model(str(self.name) + str(bleu_score) + '_' + str(epoch))
+        if (BLEU):
+            if (bleu_score >= avg_best):
+                self.save_model(str(self.name)+str(bleu_score))
+                logging.info("MODEL SAVED")
+                print("MODEL SAVED")
+
+
+            return bleu_score, self.score
+        else:
+            acc_avg = acc_avg/float(len(dev))
+            self.score['acc_avg'] = acc_avg
+            if (acc_avg >= avg_best):
+                self.save_model(str(self.name)+str(acc_avg) + '_'+str(epoch))
+                logging.info("MODEL SAVED")
+                print("MODEL SAVED")
+            return acc_avg, self.score
+
+    def analysis(self, dev, lang, avg_best, epoch, BLEU=False):
+        logging.info("STARTING EVALUATION")
+        acc_avg = 0.0
+        wer_avg = 0.0
+        bleu_avg = 0.0
+        acc_P = 0.0
+        acc_V = 0.0
+        microF1_PRED, microF1_PRED_cal, microF1_PRED_nav, microF1_PRED_wet = 0, 0, 0, 0
+        microF1_TRUE, microF1_TRUE_cal, microF1_TRUE_nav, microF1_TRUE_wet = 0, 0, 0, 0
+        ref = []
+        hyp = []
+        ref_s = ""
+        hyp_s = ""
+        dialog_acc_dict = {}
+
+        if int(args["task"]) != 6:
+            global_entity_list = entityList('data/dialog-bAbI-tasks/dialog-babi-kb-all.txt', int(args["task"]))
+        else:
+            global_entity_list = entityList('data/dialog-bAbI-tasks/dialog-babi-task6-dstc2-kb.txt',
+                                            int(args["task"]))
+
+        pbar = tqdm(enumerate(dev), total=len(dev))
+        for j, data_dev in pbar:
+            # evaluate_batch(self,batch_size,input_batches, input_lengths, target_batches, target_lengths, target_index,target_gate,src_plain):
+            words = self.evaluate_batch(len(data_dev[1]), data_dev[0], data_dev[1],
+                                        data_dev[2], data_dev[3], data_dev[4], data_dev[5], data_dev[6])
+            acc = 0
+            w = 0
+            temp_gen = []
+
+
+
+            for i, row in enumerate(np.transpose(words)):
+
+                temp = data_dev[6][i]
+                src_sent = ""
+                prev_speaker = '-'
+                for jj in temp:
+                    cur_word = ''
+                    if jj[1] != prev_speaker:
+                        cur_word += jj[1] + ':'
+                        prev_speaker = jj[1]
+                    cur_word += jj[0] + ' '
+                    src_sent += cur_word
+
+                st = ''
+                for e in row:
+                    if e == '<EOS>':
+                        break
+                    else:
+                        st += e + ' '
+                temp_gen.append(st)
+                correct = data_dev[7][i]  # 정답.
+                ### compute F1 SCORE
+                st = st.lstrip().rstrip()
+                correct = correct.lstrip().rstrip()
+
+                print(src_sent)
+                print(st)
+                print(correct)
+
+                if args['dataset'] == 'babi' and int(args["task"]) == 6:
+                    f1_true, count = self.compute_prf(data_dev[10][i], st.split(), global_entity_list, data_dev[12][i])
+                    microF1_TRUE += f1_true
+                    microF1_PRED += count
+
+                if args['dataset'] == 'babi':
+                    if data_dev[11][i] not in dialog_acc_dict.keys():
+                        dialog_acc_dict[data_dev[11][i]] = []
+                    if (correct == st):
+                        acc += 1
+                        dialog_acc_dict[data_dev[11][i]].append(1)
+                    else:
+                        dialog_acc_dict[data_dev[11][i]].append(0)
+                else:
+                    if (correct == st):
+                        acc += 1
+                #    print("Correct:"+str(correct))
+                #    print("\tPredict:"+str(st))
+                #    print("\tFrom:"+str(self.from_whichs[:,i]))
+
+                w += wer(correct, st)
+                ref.append(str(correct))
+                hyp.append(str(st))
+                ref_s += str(correct) + "\n"
+                hyp_s += str(st) + "\n"
+
+            acc_avg += acc / float(len(data_dev[1]))
+            wer_avg += w / float(len(data_dev[1]))
+            pbar.set_description("R:{:.4f},W:{:.4f}".format(acc_avg / float(len(dev)),
+                                                            wer_avg / float(len(dev))))
+
+        # dialog accuracy
+        if args['dataset'] == 'babi':
+            dia_acc = 0
+            for k in dialog_acc_dict.keys():
+                if len(dialog_acc_dict[k]) == sum(dialog_acc_dict[k]):
+                    dia_acc += 1
+            logging.info("Dialog Accuracy:\t" + str(dia_acc * 1.0 / len(dialog_acc_dict.keys())))
+            print("Dialog Accuracy:\t" + str(dia_acc * 1.0 / len(dialog_acc_dict.keys())))
+
+        if args['dataset'] == 'babi' and int(args["task"]) == 6:
+            logging.info("F1 SCORE:\t{}".format(microF1_TRUE / float(microF1_PRED)))
+            print("F1 SCORE:\t{}".format(microF1_TRUE / float(microF1_PRED)))
+            self.score['F1'] = microF1_TRUE / float(microF1_PRED)
+
+        bleu_score = moses_multi_bleu(np.array(hyp), np.array(ref), lowercase=True)
+        logging.info("BLEU SCORE:" + str(bleu_score))
+        print("BLEU SCORE:" + str(bleu_score))
+
+        self.score['dialog'] = dia_acc * 1.0 / len(dialog_acc_dict.keys())
+        self.score['BLEU'] = bleu_score
+
+        acc_avg = acc_avg / float(len(dev))
+
+        self.score['acc_avg'] = acc_avg
+
+        if (acc_avg >= avg_best):
+            self.save_model(str(self.name) + str(acc_avg) + '_'+str(epoch))
             logging.info("MODEL SAVED")
-            print("MODEL SAVED")
-
-        return bleu_score, self.score
-
-        # if (BLEU):
-        #     if (bleu_score >= avg_best):
-        #         self.save_model(str(self.name)+str(bleu_score))
-        #         logging.info("MODEL SAVED")
-        #         print("MODEL SAVED")
-        #
-        #
-        #     return bleu_score, self.score
-        # else:
-        #     acc_avg = acc_avg/float(len(dev))
-        #     if (acc_avg >= avg_best):
-        #         self.save_model(str(self.name)+str(acc_avg))
-        #         logging.info("MODEL SAVED")
-        #         print("MODEL SAVED")
-        #     return acc_avg, self.score
+        return acc_avg, self.score
 
     def compute_prf(self, gold, pred, global_entity_list, kb_plain):
         local_kb_word = [k[0] for k in kb_plain]

@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f4b91fe3-67fc-4487-be75-80b33e256506" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Mem2Seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Mem2Seq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/utils_babi_mem2seq.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils_babi_mem2seq.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,15 +17,16 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_test.coverage" NAME="main_test Coverage Results" MODIFIED="1591505813913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_train.coverage" NAME="main_train Coverage Results" MODIFIED="1591507923421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_analysis.coverage" NAME="main_analysis Coverage Results" MODIFIED="1592894189535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/kbox_Mem2Seq$main_train.coverage" NAME="main_train Coverage Results" MODIFIED="1592909377552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1520">
-              <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
+            <state relative-caret-position="50">
+              <caret line="77" column="11" lean-forward="true" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -32,21 +35,72 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt">
+        <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/rnn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="85" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
+            <state relative-caret-position="502">
+              <caret line="142" column="46" lean-forward="true" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/module.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="264" selection-start-line="264" selection-end-line="264" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="825">
+              <caret line="3072" column="34" selection-start-line="3072" selection-start-column="16" selection-end-line="3072" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+            <state relative-caret-position="-353">
+              <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="307" column="4" selection-start-line="307" selection-start-column="4" selection-end-line="307" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/utils_babi_mem2seq.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="704">
+              <caret line="364" column="60" selection-start-line="364" selection-start-column="60" selection-end-line="364" selection-end-column="60" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -55,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Mem2Seq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4351">
-              <caret line="250" column="14" selection-start-line="250" selection-start-column="14" selection-end-line="250" selection-end-column="14" />
+            <state relative-caret-position="12">
+              <caret line="250" column="16" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="16" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -65,36 +119,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/config.py">
+        <entry file="file://$PROJECT_DIR$/utils/measures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+            <state relative-caret-position="228">
+              <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/withComment_Mem2Seq.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8550">
-              <caret line="470" column="40" selection-start-line="470" selection-start-column="40" selection-end-line="470" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/utils_babi_mem2seq.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5453">
-              <caret line="305" column="22" selection-start-line="305" selection-start-column="22" selection-end-line="305" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,36 +141,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>evalp</find>
-      <find>Epoch:</find>
-      <find>self.sc</find>
-      <find>self</find>
-      <find>scores</find>
-      <find>dec</find>
-      <find>task</find>
-      <find>globals()</find>
-      <find>prepare</find>
-      <find>read_langs</find>
-      <find>train</find>
-      <find>OOV</find>
-      <find>mask</find>
-      <find>shuffle</find>
-      <find>kb</find>
-      <find>useKB</find>
-      <find>USEKB</find>
-      <find>train_batch</find>
-      <find>args['evalp']</find>
-      <find>args</find>
-      <find>evaluate_batch</find>
-      <find>print</find>
-      <find>scores[</find>
       <find>avg_best</find>
       <find>return</find>
       <find>csv</find>
-      <find>save</find>
       <find>save/</find>
       <find>evaluate</find>
+      <find>hyp</find>
+      <find>moses</find>
+      <find>shuffle</find>
+      <find>Cambridge</find>
+      <find>saigon_city serves</find>
+      <find>def evaluate(</find>
+      <find>prepare</find>
+      <find>get_seq</find>
+      <find>read_langs</find>
+      <find>Dataset</find>
+      <find>get_Seq</find>
+      <find>train</find>
+      <find>get_seq_o</find>
+      <find>prepare_data_seq</find>
+      <find>analysis</find>
+      <find>F1</find>
+      <find>compute_prf</find>
+      <find>acc_avg</find>
+      <find>acc</find>
+      <find>prepare_</find>
+      <find>origin</find>
+      <find>BLEU Sc</find>
+      <find>'acc_avg'</find>
       <find>epoch</find>
+      <find>save</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,14 +179,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/utils/utils_babi_mem2seq.py" />
         <option value="$PROJECT_DIR$/models/withComment_Mem2Seq.py" />
         <option value="$PROJECT_DIR$/models/PositionalEncoding.py" />
-        <option value="$PROJECT_DIR$/config/config.yaml" />
         <option value="$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt" />
+        <option value="$PROJECT_DIR$/config/config.yaml" />
+        <option value="$PROJECT_DIR$/main_test.py" />
+        <option value="$PROJECT_DIR$/main_analysis.py" />
+        <option value="$PROJECT_DIR$/utils/utils_babi_mem2seq.py" />
         <option value="$PROJECT_DIR$/models/Mem2Seq.py" />
         <option value="$PROJECT_DIR$/main_train.py" />
-        <option value="$PROJECT_DIR$/main_test.py" />
       </list>
     </option>
   </component>
@@ -218,6 +249,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\TEEMO\Desktop\pyProjects\kbox_Mem2Seq" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -231,6 +267,31 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.main_train">
+    <configuration name="main_analysis" type="PythonConfigurationType" factoryName="Python">
+      <module name="kbox_Mem2Seq" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
+        <env name="CUDA_VISIBLE_DEVICES" value="1" />
+        <env name="CUDA_HOME" value="/usr/local/cuda-9.0" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_analysis.py" />
+      <option name="PARAMETERS" value="-dec=Mem2Seq -path=save/mem2seq-BABI/6HDD256BSZ256DR0.2L3lr0.001Mem2Seq70.62_145_bestFF -bsz=256 -ds=babi -t=6" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kbox_Mem2Seq" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -263,7 +324,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="LD_LIBRARY_PATH" value="/usr/local/cuda-9.0/lib64" />
-        <env name="CUDA_VISIBLE_DEVICES" value="1" />
+        <env name="CUDA_VISIBLE_DEVICES" value="0" />
         <env name="CUDA_HOME" value="/usr/local/cuda-9.0" />
       </envs>
       <option name="SDK_HOME" value="" />
@@ -273,7 +334,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_train.py" />
-      <option name="PARAMETERS" value="-lr=0.001 -layer=1 -hdd=128 -dr=0.2 -dec=Mem2Seq -bsz=8 -ds=babi -t=6" />
+      <option name="PARAMETERS" value="-lr=0.001 -layer=3 -hdd=256 -dr=0.2 -dec=Mem2Seq -bsz=256 -ds=babi -t=6" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -281,6 +342,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.main_analysis" />
+      <item itemvalue="Python.main_test" />
+      <item itemvalue="Python.main_train" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_train" />
@@ -317,29 +383,33 @@
       <workItem from="1592360815148" duration="1757000" />
       <workItem from="1592475977605" duration="311000" />
       <workItem from="1592532487142" duration="18000" />
+      <workItem from="1592800582322" duration="1147000" />
+      <workItem from="1592888344839" duration="6679000" />
+      <workItem from="1592898362743" duration="34000" />
+      <workItem from="1592900352969" duration="5040000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41905000" />
+    <option name="totallyTimeSpent" value="54805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2835821" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14658849" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.335141" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.19197397" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.28524947" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="File Transfer" order="9" visible="true" weight="0.2407809" />
+      <window_info anchor="bottom" id="File Transfer" order="9" weight="0.27114967" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
@@ -356,98 +426,80 @@
     <option name="version" value="1" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py</url>
-          <line>285</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main_train.py</url>
-          <line>53</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="embed_A.shape" language="Python" />
-        <watch expression="story_size" language="Python" />
-        <watch expression="embed_A.size(-1)" language="Python" />
-        <watch expression="story_size+(embed_A.size(-1),)" language="Python" />
-        <watch expression="embed_A.size()" language="Python" />
-        <watch expression="embed_A.size(0)+embed_A.size(1)" language="Python" />
-        <watch expression="torch.Size([embed_A.size(0),embed_A.size(1),embed_A.size(2)*embed_A.size(3)])" language="Python" />
-        <watch expression="embed_A.size()" language="Python" />
-        <watch expression="m_A.size()" language="Python" />
-        <watch expression="cur_tume" language="Python" />
-        <watch expression="args['evalp']" language="Python" />
-        <watch expression="directory" language="Python" />
-        <watch expression="args[&quot;task&quot;]" language="Python" />
-        <watch expression="data[0].shape" language="Python" />
-        <watch expression="data[2].shape" language="Python" />
-        <watch expression="pair_train" language="Python" />
-        <watch expression="x_seq" language="Python" />
-        <watch expression="y_seq" language="Python" />
-        <watch expression="data[0]" language="Python" />
-        <watch expression="data[1]" language="Python" />
-        <watch expression="data[8]" language="Python" />
-        <watch expression="data[:10]" language="Python" />
-        <watch expression="args['evalp']" language="Python" />
-        <watch expression="args" language="Python" />
+        <watch expression="data_dev[11][i]" language="Python" />
+        <watch expression="st" language="Python" />
+        <watch expression="correct" language="Python" />
+        <watch expression="data_dev" language="Python" />
+        <watch expression="pair_dev" language="Python" />
+        <watch expression="dev" language="Python" />
+        <watch expression="pbar" language="Python" />
+        <watch expression="dev" language="Python" />
+        <watch expression="object" language="Python" />
+        <watch expression="data_dev[11]" language="Python" />
+        <watch expression="__py_debug_temp_var_1198674944" />
+        <watch expression="data_dev[6]" language="Python" />
+        <watch expression="data_dev[7]" language="Python" />
+        <watch expression="len(data_dev[1])" language="Python" />
+        <watch expression="ii" language="Python" />
+        <watch expression="ii[0]" language="Python" />
+        <watch expression="src_sent" language="Python" />
+        <watch expression="temp[-10:]" language="Python" />
+        <watch expression="data_dev[7]" language="Python" />
+        <watch expression="seq" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>args</expression-string>
+        <expression-string>seq</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>args['evalp']</expression-string>
+        <expression-string>data_dev[7]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>data[:10]</expression-string>
+        <expression-string>temp[-10:]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>data[8]</expression-string>
+        <expression-string>src_sent</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>data[1]</expression-string>
+        <expression-string>ii[0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>data[0]</expression-string>
+        <expression-string>ii</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>y_seq</expression-string>
+        <expression-string>len(data_dev[1])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>x_seq</expression-string>
+        <expression-string>data_dev[6]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pair_train</expression-string>
+        <expression-string>data_dev[11]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>data[2].shape</expression-string>
+        <expression-string>object</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -484,13 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/PositionalEncoding.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -501,51 +546,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/rnn.py">
+    <entry file="file://$PROJECT_DIR$/config/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2185">
-          <caret line="126" selection-start-line="126" selection-end-line="126" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4883">
-          <caret line="264" selection-start-line="264" selection-end-line="264" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="322" column="26" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1520">
-          <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="85" selection-start-line="22" selection-start-column="85" selection-end-line="22" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Mem2Seq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4351">
-          <caret line="250" column="14" selection-start-line="250" selection-start-column="14" selection-end-line="250" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="19">
+          <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -569,20 +573,112 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6tst.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="45" lean-forward="true" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/utils/data/dataloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10526">
+          <caret line="559" selection-start-line="559" selection-end-line="559" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6dev.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task5dev.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="47" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/measures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="43" column="61" selection-start-line="43" selection-start-column="61" selection-end-line="43" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="264" selection-start-line="264" selection-end-line="264" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/remote_sources/1306778481/-514741730/torch/nn/modules/rnn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="142" column="46" lean-forward="true" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-353">
+          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/dialog-bAbI-tasks/dialog-babi-task6trn.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="3072" column="34" selection-start-line="3072" selection-start-column="16" selection-end-line="3072" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utils_kvr_mem2seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="307" column="4" selection-start-line="307" selection-start-column="4" selection-end-line="307" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils_babi_mem2seq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5453">
-          <caret line="305" column="22" selection-start-line="305" selection-start-column="22" selection-end-line="305" selection-end-column="22" />
+        <state relative-caret-position="704">
+          <caret line="364" column="60" selection-start-line="364" selection-start-column="60" selection-end-line="364" selection-end-column="60" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_test.py">
+    <entry file="file://$PROJECT_DIR$/models/Mem2Seq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+        <state relative-caret-position="12">
+          <caret line="250" column="16" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="77" column="11" lean-forward="true" selection-start-line="77" selection-start-column="11" selection-end-line="77" selection-end-column="11" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

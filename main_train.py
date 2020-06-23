@@ -74,9 +74,10 @@ else:
 
 
 scores = []
-args['evalp'] = 5
+args['evalp'] = 1
+n_epoch = 1
 
-for epoch in range(500):
+for epoch in range(n_epoch):
     logging.info("Epoch:{}".format(epoch))
     print("Epoch:{}".format(epoch))
     # Run the train function
@@ -86,8 +87,6 @@ for epoch in range(500):
                         len(data[1]),10.0,0.5,i==0)
         pbar.set_description(model.print_loss())
 
-    if epoch < 50:
-        continue
     if((epoch+1) % int(args['evalp']) == 0):
         acc, score = model.evaluate(dev,avg_best, epoch+1, BLEU)
         cp = deepcopy(score)
@@ -108,20 +107,6 @@ for epoch in range(500):
         if(acc == 1.0): break 
 
 
-max_f1 = 0
-max_epoch = -1
-max_i = -1
-for i, score in enumerate(scores):
-    epoch = (i + 1) * int(args['evalp'])
-    if max_f1 < score['F1']:
-        max_f1 = score['F1']
-        max_epoch = epoch
-        max_i = i
-
-print("BEST_EPOCH: {}".format(max_epoch))
-print(scores[i])
-
-
 
 now = time.localtime()
 cur_time = "%02d_%02d_%02d_%02d" % (now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min)
@@ -131,8 +116,8 @@ print(cur_time)
 
 with open('{}.csv'.format(cur_time), 'w', newline='', encoding='UTF-8') as f:
     makewrite = csv.writer(f)
-    makewrite.writerow(['epoch', 'dialog', 'f1', 'BLEU'])
+    makewrite.writerow(['epoch', 'dialog', 'f1', 'BLEU', 'acc_avg'])
     for i, score in enumerate(scores):
-        row = [(i+1)*int(args['evalp']), score['dialog'], score['F1'], score['BLEU']]
+        row = [(i+1)*int(args['evalp']), score['dialog'], score['F1'], score['BLEU'], score['acc_avg']]
         makewrite.writerow(row)
 

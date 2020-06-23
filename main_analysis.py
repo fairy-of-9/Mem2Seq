@@ -40,7 +40,7 @@ directory = args['path'].split("/")
 task = directory[2].split('HDD')[0]
 HDD = directory[2].split('HDD')[1].split('BSZ')[0]
 L = directory[2].split('L')[1].split('lr')[0]
-
+## lang 내에 vocab이 있을 것.
 train, dev, test, testOOV, lang, max_len, max_r = prepare_data_seq(task, batch_size=int(args['batch']))
 
 with open(os.path.join('config', 'config.yaml'), 'r') as f:
@@ -53,9 +53,9 @@ else:
     model = globals()[args['decoder']](
         config, int(HDD),max_len,max_r,lang,args['path'],task, lr=0.0, n_layers=int(L), dropout=0.0)
 
-acc_test = model.evaluate(test, 1e6, 0, BLEU)
+acc_test = model.analysis(test, lang, 1e6, 0, BLEU)
 print(acc_test)
 if testOOV!=[]:
-    acc_oov_test = model.evaluate(testOOV,1e6,0,BLEU)
+    acc_oov_test = model.analysis(testOOV, lang, 1e6,0,BLEU)
     print(acc_oov_test)
 

@@ -48,7 +48,6 @@ class Lang:
         else:
             self.word2count[word] += 1
 
-
 class Dataset(data.Dataset):
     """Custom data.Dataset compatible with data.DataLoader."""
     def __init__(self, src_seq, trg_seq, index_seq, gate_seq,src_word2id, trg_word2id,max_len, conv_seq,ent,ID,kb_arr):
@@ -84,7 +83,7 @@ class Dataset(data.Dataset):
 
     def __len__(self):
         return self.num_total_seqs
-    
+
     def preprocess(self, sequence, word2id, trg=True):
         """Converts words to ids."""
         if trg:
@@ -305,6 +304,37 @@ def get_seq(pairs,lang,batch_size,type,max_len):
                                               collate_fn=collate_fn) # TODO shuffle True로 바꾸기.
     return data_loader
 
+
+def get_seq_origin(pairs, lang, batch_size, type, max_len):
+    x_seq = []
+    y_seq = []
+    ptr_seq = []
+    gate_seq = []
+    conv_seq = []
+    ent = []
+    ID = []
+    kb_arr = []
+    for pair in pairs:
+        x_seq.append(pair[0])
+        y_seq.append(pair[1])
+        ptr_seq.append(pair[2])
+        gate_seq.append(pair[3])
+        conv_seq.append(pair[4])
+        ent.append(pair[5])
+        ID.append(pair[6])
+        kb_arr.append(pair[7])
+        if (type):
+            lang.index_words(pair[0])  # make vocab.
+            lang.index_words(pair[1], trg=True)
+
+    dataset = originDataset(x_seq, y_seq, ptr_seq, gate_seq, lang.word2index, lang.word2index, max_len, conv_seq, ent, ID,
+                      kb_arr)
+    data_loader = torch.utils.data.DataLoader(dataset=dataset,
+                                              batch_size=batch_size,
+                                              shuffle=False,
+                                              collate_fn=collate_fn)  # TODO shuffle True로 바꾸기.
+    return data_loader
+
 def prepare_data_seq(task,batch_size=100,shuffle=True):
     file_train = 'data/dialog-bAbI-tasks/dialog-babi-task{}trn.txt'.format(task)
     file_dev = 'data/dialog-bAbI-tasks/dialog-babi-task{}dev.txt'.format(task)
@@ -342,7 +372,7 @@ def prepare_data_seq(task,batch_size=100,shuffle=True):
     logging.info("Read %s sentence pairs dev" % len(pair_dev))
     logging.info("Read %s sentence pairs test" % len(pair_test))
     if (int(task) != 6):
-        logging.info("Read %s sentence pairs test" % len(pair_test_OOV))    
+        logging.info("Read %s sentence pairs test" % len(pair_test_OOV))
     logging.info("Max len Input %s " % max_len)
     logging.info("Vocab_size %s " % lang.n_words)
     logging.info("USE_CUDA={}".format(USE_CUDA))
