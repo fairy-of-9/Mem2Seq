@@ -165,6 +165,8 @@ class Mem2Seq(nn.Module):
         self.loss += loss.item()
         self.loss_ptr += loss_Ptr.item()
         self.loss_vac += loss_Vocab.item()
+
+        return loss
         
     def evaluate_batch(self,batch_size,input_batches, input_lengths, target_batches, target_lengths, target_index,target_gate,src_plain):  
         # Set to not-training mode to disable dropout

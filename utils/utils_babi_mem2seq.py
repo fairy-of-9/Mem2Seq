@@ -300,8 +300,9 @@ def get_seq(pairs,lang,batch_size,type,max_len):
     dataset = Dataset(x_seq, y_seq,ptr_seq,gate_seq,lang.word2index, lang.word2index,max_len, conv_seq,ent,ID,kb_arr)
     data_loader = torch.utils.data.DataLoader(dataset=dataset,
                                               batch_size=batch_size,
-                                              shuffle=False,
-                                              collate_fn=collate_fn) # TODO shuffle True로 바꾸기.
+                                              shuffle=type, # changed False -> type
+                                              collate_fn=collate_fn,
+                                              num_workers=args['num_workers']) # TODO shuffle True로 바꾸기.
     return data_loader
 
 

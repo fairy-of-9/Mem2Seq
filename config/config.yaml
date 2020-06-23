@@ -1,2 +1,2 @@
-triple_emb: True
-positional_emb: True
+triple_emb: False
+positional_emb: False
