@@ -74,8 +74,8 @@ else:
 
 
 scores = []
-args['evalp'] = 1
-n_epoch = 1
+args['evalp'] = 5
+n_epoch = 500
 
 for epoch in range(n_epoch):
     logging.info("Epoch:{}".format(epoch))
@@ -88,7 +88,8 @@ for epoch in range(n_epoch):
         pbar.set_description(model.print_loss())
 
     if((epoch+1) % int(args['evalp']) == 0):
-        acc, score = model.evaluate(dev,avg_best, epoch+1, BLEU)
+        acc, score = model.evaluate(dev,avg_best, epoch+1, BLEU)    # 여기서 나온 score에 해당 epoch에 대한 epoch,점수들이 들어있습니다.
+                                                                    # score['epoch'], score['F1'], score['dialog'], score['BLEU'], score['acc_avg']
         cp = deepcopy(score)
         scores.append(cp)
 
