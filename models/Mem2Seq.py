@@ -600,8 +600,8 @@ class EncoderMemNN(nn.Module):
             else:
                 m_C = torch.sum(embed_C, 2).squeeze(2) # b * m * e
 
-            if self.config['positional_emb']:
-                m_C = self.pos_enc(m_C)
+            # if self.config['positional_emb']:
+            #     m_C = self.pos_enc(m_C)
 
             prob = prob.unsqueeze(2).expand_as(m_C)
             o_k  = torch.sum(m_C*prob, 1)
@@ -666,8 +666,8 @@ class DecoderMemNN(nn.Module):
             else:
                 embed_C = torch.sum(embed_C, 2).squeeze(2) # b * m * e
 
-            if self.config['positional_emb']:
-                embed_C = self.pos_enc(embed_C)
+            # if self.config['positional_emb']:
+            #     embed_C = self.pos_enc(embed_C)
 
             m_C = embed_C
             self.m_story.append(m_A)

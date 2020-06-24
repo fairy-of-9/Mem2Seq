@@ -2,3 +2,4 @@ save/
 *.pyc
 sftp-config.json
 log/
+*.csv
