@@ -7,6 +7,7 @@ from models.enc_vanilla import *
 from models.enc_Luong import *
 from models.enc_PTRUNK import *
 from models.Mem2Seq import *
+from utils.utils import save_data, load_data
 import yaml
 
 '''
@@ -38,10 +39,28 @@ else:
 # Configure models
 directory = args['path'].split("/")
 task = directory[2].split('HDD')[0]
-HDD = directory[2].split('HDD')[1].split('BSZ')[0]
-L = directory[2].split('L')[1].split('lr')[0]
+# HDD = directory[2].split('HDD')[1].split('BSZ')[0]
+HDD = directory[3].split('HDD')[1].split('BSZ')[0]
+# L = directory[2].split('L')[1].split('lr')[0]
+L = directory[3].split('L')[1].split('lr')[0]
 
-train, dev, test, testOOV, lang, max_len, max_r = prepare_data_seq(task, batch_size=int(args['batch']))
+# train, dev, test, testOOV, lang, max_len, max_r = prepare_data_seq(task, batch_size=int(args['batch']))
+# load processed data
+if not(os.path.exists(os.path.join(args['data'], 'processed_data.pickle'))):
+    train, dev, test, testOOV, lang, max_len, max_r = prepare_data_seq(args['task'],batch_size=int(args['batch']),shuffle=True)
+    processed = {
+        'train': train,
+        'dev': dev,
+        'test': test,
+        'testOOV': testOOV,
+        'lang': lang,
+        'max_len': max_len,
+        'max_r': max_r}
+    save_data(os.path.join(args['data'], 'processed_data.pickle'), processed)
+else:
+    print('load processed data from pickle file.')
+    processed = load_data(os.path.join(args['data'], 'processed_data.pickle'))
+    train, dev, test, testOOV, lang, max_len, max_r = processed['train'], processed['dev'], processed['test'], processed['testOOV'], processed['lang'], processed['max_len'], processed['max_r']
 
 with open(os.path.join('config', 'config.yaml'), 'r') as f:
     config = yaml.load(f)
@@ -58,4 +77,3 @@ print(acc_test)
 if testOOV!=[]:
     acc_oov_test = model.evaluate(testOOV,1e6,0,BLEU)
     print(acc_oov_test)
-
